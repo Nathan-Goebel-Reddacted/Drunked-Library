@@ -1,0 +1,156 @@
+
+
+
+
+
+
+/*Header*/
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+
+.linktoHome,
+.linktoAdvSearch {
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+/*quick search*/
+.quick-search {
+  position: relative;
+  flex-grow: 1;
+  max-width: 25%;
+}
+
+.quick-search-input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.quick-search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 10;
+  margin-top: 0.3rem;
+  padding: 0;
+  list-style: none;
+}
+
+.quick-search-item {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+/*index page*/
+.index-page {
+  padding: 2rem;
+}
+
+.change-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.change-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/*book detail page*/
+.book-detail-page {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.book-detail-card {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.book-cover {
+  height: auto;
+  align-self: center;
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+.wiki-block {
+  margin-top: 2rem;
+}
+
+.book-main {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.book-meta {
+  flex: 1;
+  min-width: 250px;
+  text-align: center;
+}
+
+.book-meta h2 {
+  margin-bottom: 1rem;
+}
+
+
+.book-info {
+  flex: 2;
+  min-width: 300px;
+}
+
+.book-info p {
+  margin-bottom: 1rem;
+}
+
+.book-wikipedia {
+  border-top: 1px solid #ccc;
+  padding-top: 1rem;
+}
+
+/*adv search*/
+.advanced-search-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.advanced-search-form input,
+.advanced-search-form button {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.advanced-search-results {
+  list-style: none;
+  padding: 0;
+}
+
+.advanced-search-item {
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
