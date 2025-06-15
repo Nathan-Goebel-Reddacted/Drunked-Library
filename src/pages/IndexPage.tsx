@@ -1,7 +1,8 @@
-import Header from "../componants/Header";
+import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import { useLibrarieFetch } from "../hooks/useApiFetch";
-import "../css/App.css"
+import ChangeCard from "../components/ChangeCard";
+import "../css/App.css";
 
 export default function IndexPage() {
   const [endpoint, setEndpoint] = useState("");
@@ -22,19 +23,20 @@ export default function IndexPage() {
 
   return (
     <div className="index-page">
-      <Header/>
-        <h2>Changements récents — aujourd’hui</h2>
-        <div className="change-grid">
+      <Header />
+      <h2>Changements récents — aujourd’hui</h2>
+      <div className="change-grid">
         {changes.map((change) => (
-            <div key={change.id} className="change-card">
-            <p><strong>{change.kind}</strong> — {new Date(change.timestamp).toLocaleTimeString()}</p>
-            <p>{change.comment || "(pas de commentaire)"}</p>
-            {change.author?.key && (
-                <p>Auteur : <em>{change.author.key.replace("/people/", "")}</em></p>
-            )}
-            </div>
+          <ChangeCard
+            key={change.id}
+            id={change.id}
+            kind={change.kind}
+            timestamp={change.timestamp}
+            comment={change.comment}
+            authorKey={change.author?.key}
+          />
         ))}
-        </div>
+      </div>
     </div>
   );
 }

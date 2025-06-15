@@ -1,19 +1,19 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import { useLibrarieFetch } from "../hooks/useApiFetch";
-import "../css/App.css"
+import SearchResultItem from "./SearchResultItem";
+import { useInputColor } from "../hooks/useInputColor";
+import "../css/App.css";
 
 export default function QuickSearch() {
   const [search, setSearch] = useState("");
   const [endpoint, setEndpoint] = useState("");
   const [results, setResults] = useState<any[]>([]);
-  const navigate = useNavigate();
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  useInputColor(search, inputRef);
 
   const timeoutRef = useRef<number | null>(null);
-
-  
   const { data } = useLibrarieFetch(endpoint);
-
 
   useEffect(() => {
     if (!search.trim()) {
@@ -22,23 +22,17 @@ export default function QuickSearch() {
       return;
     }
 
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
-    //throttle a 300 ms
     timeoutRef.current = window.setTimeout(() => {
       const encoded = encodeURIComponent(search.trim());
       setEndpoint(`/search.json?q=${encoded}`);
     }, 300);
 
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, [search]);
-
 
   useEffect(() => {
     if (data?.docs) {
@@ -49,6 +43,7 @@ export default function QuickSearch() {
   return (
     <div className="quick-search">
       <input
+        ref={inputRef}
         type="text"
         className="quick-search-input"
         placeholder="Recherche rapide..."
@@ -59,19 +54,7 @@ export default function QuickSearch() {
       {results.length > 0 && (
         <ul className="quick-search-results">
           {results.map((book, index) => (
-            <li
-                key={index}
-                className="quick-search-item"
-                onClick={() => {
-                    const id = book.key.replace("/works/", "");
-                    navigate(`/book/${id}`);
-                }}
-            >
-              <strong>{book.title}</strong>{" "}
-              {book.author_name?.[0] && (
-                <span>— {book.author_name[0]}</span>
-              )}
-            </li>
+            <SearchResultItem key={index} book={book} />
           ))}
         </ul>
       )}

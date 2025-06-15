@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useLibrarieFetch, useWikiFetch } from "../hooks/useApiFetch";
-import Header from "../componants/Header";
+import Header from "../components/Header";
 
 export default function BookDetailPage() {
   const { bookId } = useParams();
