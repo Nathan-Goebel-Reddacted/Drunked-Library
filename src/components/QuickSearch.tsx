@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { useLibrarieFetch } from "../hooks/useApiFetch";
 import SearchResultItem from "./SearchResultItem";
 import { useInputColor } from "../hooks/useInputColor";
@@ -10,9 +11,10 @@ export default function QuickSearch() {
   const [results, setResults] = useState<any[]>([]);
 
   const inputRef = useRef<HTMLInputElement>(null);
-  useInputColor(search, inputRef);
-
   const timeoutRef = useRef<number | null>(null);
+  const navigate = useNavigate();
+
+  useInputColor(search, inputRef);
   const { data } = useLibrarieFetch(endpoint);
 
   useEffect(() => {
@@ -40,6 +42,13 @@ export default function QuickSearch() {
     }
   }, [data]);
 
+  const handleItemClick = (book: any) => {
+    const id = book.key.replace("/works/", "").split("/").pop();
+    setSearch("");
+    setResults([]);
+    navigate(`/book/${id}`);
+  };
+
   return (
     <div className="quick-search">
       <input
@@ -54,7 +63,11 @@ export default function QuickSearch() {
       {results.length > 0 && (
         <ul className="quick-search-results">
           {results.map((book, index) => (
-            <SearchResultItem key={index} book={book} />
+            <SearchResultItem
+              key={index}
+              book={book}
+              onClick={handleItemClick}
+            />
           ))}
         </ul>
       )}

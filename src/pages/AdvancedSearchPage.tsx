@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
 import { useLibrarieFetch } from "../hooks/useApiFetch";
 import { useInputColor } from "../hooks/useInputColor";
-import Header from "../components/Header";
 import SearchResultItem from "../components/SearchResultItem";
+import { useClickColor } from "../hooks/useClickColor";
 import "../css/App.css";
 
 export default function AdvancedSearchPage() {
@@ -10,6 +10,7 @@ export default function AdvancedSearchPage() {
   const [author, setAuthor] = useState("");
   const [subject, setSubject] = useState("");
   const [endpoint, setEndpoint] = useState("");
+  const [btnColor, handleBtnClick] = useClickColor("white");
 
     const titleRef = useRef<HTMLInputElement>(null);
     const authorRef = useRef<HTMLInputElement>(null);
@@ -35,7 +36,6 @@ export default function AdvancedSearchPage() {
 
   return (
     <div className="advanced-search-page">
-      <Header />
       <h2>Recherche avancée</h2>
 
       <form onSubmit={handleSearch} className="advanced-search-form">
@@ -63,7 +63,12 @@ export default function AdvancedSearchPage() {
             onChange={(e) => setSubject(e.target.value)}
             className="input-subject"
         />
-        <button type="submit" className="search-button">
+        <button
+          type="submit"
+          className="search-button"
+          style={{ backgroundColor: btnColor }}
+          onClick={handleBtnClick}
+        >
           Rechercher
         </button>
       </form>

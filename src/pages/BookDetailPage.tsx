@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useLibrarieFetch, useWikiFetch } from "../hooks/useApiFetch";
-import Header from "../components/Header";
 
 export default function BookDetailPage() {
   const { bookId } = useParams();
@@ -24,7 +23,6 @@ export default function BookDetailPage() {
 
   return (
     <div className="book-detail-page">
-        <Header/>
         {bookData ? (
             <>
             <div className="book-main">

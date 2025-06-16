@@ -1,4 +1,3 @@
-import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import { useLibrarieFetch } from "../hooks/useApiFetch";
 import ChangeCard from "../components/ChangeCard";
@@ -23,7 +22,6 @@ export default function IndexPage() {
 
   return (
     <div className="index-page">
-      <Header />
       <h2>Changements récents — aujourd’hui</h2>
       <div className="change-grid">
         {changes.map((change) => (
